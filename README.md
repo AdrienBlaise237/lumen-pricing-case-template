@@ -46,4 +46,10 @@ These questions aren't here to slow you down — they're part of what's being ev
 
 ## Our Approach
 
-*[To be filled in by the team at the end.]*
+We built a browser-based Germany Launch Cockpit rather than a slide deck. It lets the team adjust the three tested shelf prices and the launch-channel mix, then immediately see the acceptance, contribution per can and contribution margin implied by the underlying channel-level price tests. The recommended starting point is €2.19, launched through Gym & Office and DTC in Berlin and Munich, with grocery held back until repeat purchase and acquisition economics are proven. This deliberately trades some early scale and maximum per-can margin for a stronger trial rate, fast channel learning and a credible accessible-premium position.
+
+The cockpit uses only non-identifying, aggregated or market-level source data from Exhibits 1, 2, 9, 11 and 12. It does not load, display or process the respondent-level names or email addresses in `customer_survey.csv`, and it uses no external API or API key.
+
+### Run locally
+
+From the repository root, run `python3 -m http.server 8000`, then open `http://localhost:8000` in a browser.
