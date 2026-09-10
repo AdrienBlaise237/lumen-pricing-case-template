@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LUMEN — Germany Launch Cockpit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="LUMEN launch cockpit home"><span class="brand-mark">L</span><span>LUMEN</span></a>
+        <div class="topbar-meta"><span class="pulse"></span> Germany entry decision · 2026</div>
+      </header>
+
+      <section class="hero" id="top">
+        <p class="eyebrow">Strategy &amp; Analytics / Decision cockpit</p>
+        <h1>Make the Germany launch<br /><em>worth repeating.</em></h1>
+        <p class="hero-copy">Set the price and channel mix. The model makes the commercial trade-off visible before LUMEN commits its launch spend.</p>
+        <div class="hero-tag"><span>Recommended starting point</span><strong>€2.19 · Gym &amp; Office + DTC · May</strong></div>
+      </section>
+
+      <section class="decision-grid" aria-label="Launch decision model">
+        <aside class="controls card">
+          <div class="section-label">01 / Your launch design</div>
+          <h2>Choose the trade-off</h2>
+          <p class="quiet">The model applies the channel-specific price-test result to your selected mix.</p>
+
+          <fieldset class="price-options">
+            <legend>Retail shelf price / 330ml</legend>
+            <label><input type="radio" name="price" value="1.79" /><span><b>€1.79</b><small>Volume-led</small></span></label>
+            <label class="selected"><input type="radio" name="price" value="2.19" checked /><span><b>€2.19</b><small>Balanced</small></span></label>
+            <label><input type="radio" name="price" value="2.59" /><span><b>€2.59</b><small>Margin-led</small></span></label>
+          </fieldset>
+
+          <div class="mix-head"><span>Launch-channel mix</span><span id="mix-total">100%</span></div>
+          <label class="range-row"><span>DTC online</span><output id="dtc-out">35%</output><input id="dtc" type="range" min="0" max="100" value="35" /></label>
+          <label class="range-row"><span>Retail / grocery</span><output id="retail-out">25%</output><input id="retail" type="range" min="0" max="100" value="25" /></label>
+          <label class="range-row"><span>Gym &amp; office</span><output id="gym-out">40%</output><input id="gym" type="range" min="0" max="100" value="40" /></label>
+          <p class="tiny">Mix automatically normalises to 100% for calculation.</p>
+        </aside>
+
+        <section class="outcome card">
+          <div class="section-label">02 / What this buys</div>
+          <div class="outcome-head"><div><h2 id="outcome-title">Accessible premium</h2><p id="outcome-subtitle">Protects willingness to try without becoming a commodity.</p></div><span class="score" id="score">BEST FIT</span></div>
+          <div class="metrics">
+            <article><span>Estimated acceptance</span><strong id="acceptance">51.7%</strong><small>of price-test respondents</small></article>
+            <article><span>Blended contribution</span><strong id="contribution">€1.11</strong><small>per can after channel costs</small></article>
+            <article><span>Contribution margin</span><strong id="margin">63.7%</strong><small>on LUMEN net revenue</small></article>
+          </div>
+          <div class="volume-card">
+            <div><span>Illustrative contribution</span><strong id="scenario-value">€11,060</strong><small>per 10,000 considered units</small></div>
+            <div class="bars" aria-label="Contribution by channel"><i id="bar-dtc"></i><i id="bar-retail"></i><i id="bar-gym"></i></div>
+          </div>
+          <p class="model-note">A direction-setting simulator, not a forecast: acceptance comes from Exhibit 11; contribution reflects the selected channel mix.</p>
+        </section>
+      </section>
+
+      <section class="recommendation card">
+        <div class="section-label">03 / The recommendation</div>
+        <div class="recommendation-body">
+          <div><p class="rec-kicker">Launch at <span>€2.19</span></p><h2>Premium enough to signal quality.<br />Accessible enough to earn trial.</h2></div>
+          <div class="rec-copy"><p>Start in <strong>Gym &amp; Office</strong> and <strong>DTC Online</strong>, then use repeat and CAC evidence before expanding to grocery. Lead with clean energy for active urban routines—not a luxury adaptogen ritual.</p><p><strong>Deliberate trade-off:</strong> we give up some early grocery scale and the €2.59 margin ceiling in exchange for materially stronger acceptance, faster learning, and more credible premium positioning.</p></div>
+        </div>
+      </section>
+
+      <section class="insights-grid">
+        <section class="card competitors">
+          <div class="section-label">Market reference</div>
+          <h2>Where LUMEN sits on shelf</h2>
+          <p class="quiet">Single-can benchmarks by channel. LUMEN at €2.19 sits between heritage niche and premium performance.</p>
+          <div id="competitor-chart" class="competitor-chart" aria-label="Competitor price benchmarks"></div>
+          <div class="legend"><span><i class="dot lumen"></i>LUMEN launch price</span><span><i class="dot"></i>Competitor price</span></div>
+        </section>
+        <section class="card timing">
+          <div class="section-label">Launch readiness</div>
+          <h2>Build in April.<br /><em>Launch in May.</em></h2>
+          <p class="quiet">Demand crosses above its annual baseline in May and climbs through July.</p>
+          <div id="seasonality" class="seasonality" aria-label="Monthly demand seasonality"></div>
+          <div class="timing-callout"><span>May demand index</span><strong id="may-index">118</strong><small>vs. 100 annual average</small></div>
+        </section>
+      </section>
+
+      <section class="city card">
+        <div><div class="section-label">Phased entry</div><h2>Prove the playbook in Berlin + Munich.</h2></div>
+        <p>These cities combine the highest illustrative market concentration with the fastest regional growth (9%). Keep Hamburg, Cologne and Frankfurt as the next expansion wave once channel economics hold.</p>
+        <div class="city-stats"><span><b>33%</b> combined market share</span><span><b>9%</b> regional CAGR</span></div>
+      </section>
+
+      <footer><span>LUMEN Germany Launch Cockpit</span><span>Built from Exhibits 1, 2, 9, 11 &amp; 12 · No respondent-level personal data is used.</span></footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
