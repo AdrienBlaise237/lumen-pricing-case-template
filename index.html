@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="integration.css" />
+    <link rel="stylesheet" href="scenario.css" />
   </head>
   <body>
     <main class="shell">
@@ -22,7 +23,17 @@
         <p class="eyebrow">Strategy &amp; Analytics / Decision cockpit</p>
         <h1>Make the Germany launch<br /><em>worth repeating.</em></h1>
         <p class="hero-copy">Set the price and channel mix. The model makes the commercial trade-off visible before LUMEN commits its launch spend.</p>
-        <div class="hero-tag"><span>Recommended starting point</span><strong>€2.19 · Gym &amp; Office + DTC · May</strong></div>
+        <div class="hero-tag"><span>Recommended starting point</span><strong id="hero-recommendation">€2.19 · Gym &amp; Office + DTC · May</strong></div>
+      </section>
+
+      <section class="scenario-switcher" aria-label="Launch scenarios">
+        <div><p class="section-label">Scenario view</p><h2>Test the management trade-off.</h2></div>
+        <div class="scenario-options" role="group" aria-label="Choose a scenario">
+          <button type="button" data-scenario="conservative">Conservative <small>Protect learning</small></button>
+          <button type="button" data-scenario="balanced" class="active">Balanced <small>Recommended</small></button>
+          <button type="button" data-scenario="growth">Growth <small>Push scale</small></button>
+        </div>
+        <p class="scenario-note">Changes the existing price, channel mix, city/timing summary and recommendation narrative. It does not change the independent evidence modules below.</p>
       </section>
 
       <section class="decision-grid" id="pricing" aria-label="Launch decision model">
@@ -64,8 +75,8 @@
       <section class="recommendation card">
         <div class="section-label">03 / The recommendation</div>
         <div class="recommendation-body">
-          <div><p class="rec-kicker">Launch at <span>€2.19</span></p><h2>Premium enough to signal quality.<br />Accessible enough to earn trial.</h2></div>
-          <div class="rec-copy"><p>Start in <strong>Gym &amp; Office</strong> and <strong>DTC Online</strong>, then use repeat and CAC evidence before expanding to grocery. Lead with clean energy for active urban routines—not a luxury adaptogen ritual.</p><p><strong>Deliberate trade-off:</strong> we give up some early grocery scale and the €2.59 margin ceiling in exchange for materially stronger acceptance, faster learning, and more credible premium positioning.</p></div>
+          <div><p class="rec-kicker"><span id="scenario-choice">Balanced scenario</span> · launch at <span id="scenario-price">€2.19</span></p><h2 id="scenario-headline">Premium enough to signal quality.<br />Accessible enough to earn trial.</h2></div>
+          <div class="rec-copy"><p id="scenario-copy">Start in <strong>Gym &amp; Office</strong> and <strong>DTC Online</strong>, then use repeat and CAC evidence before expanding to grocery. Lead with clean energy for active urban routines—not a luxury adaptogen ritual.</p><p id="scenario-tradeoff"><strong>Deliberate trade-off:</strong> we give up some early grocery scale and the €2.59 margin ceiling in exchange for materially stronger acceptance, faster learning, and more credible premium positioning.</p></div>
         </div>
       </section>
 
@@ -79,17 +90,17 @@
         </section>
         <section class="card timing">
           <div class="section-label">Launch readiness</div>
-          <h2>Build in April.<br /><em>Launch in May.</em></h2>
-          <p class="quiet">Demand crosses above its annual baseline in May and climbs through July.</p>
+          <h2 id="timing-heading">Build in April.<br /><em>Launch in May.</em></h2>
+          <p class="quiet" id="timing-copy">Demand crosses above its annual baseline in May and climbs through July.</p>
           <div id="seasonality" class="seasonality" aria-label="Monthly demand seasonality"></div>
-          <div class="timing-callout"><span>May demand index</span><strong id="may-index">118</strong><small>vs. 100 annual average</small></div>
+          <div class="timing-callout"><span id="timing-label">May demand index</span><strong id="may-index">118</strong><small>vs. 100 annual average</small></div>
         </section>
       </section>
 
       <section class="city card">
-        <div><div class="section-label">Phased entry</div><h2>Prove the playbook in Berlin + Munich.</h2></div>
-        <p>These cities combine the highest illustrative market concentration with the fastest regional growth (9%). Keep Hamburg, Cologne and Frankfurt as the next expansion wave once channel economics hold.</p>
-        <div class="city-stats"><span><b>33%</b> combined market share</span><span><b>9%</b> regional CAGR</span></div>
+        <div><div class="section-label">Phased entry</div><h2 id="city-heading">Prove the playbook in Berlin + Munich.</h2></div>
+        <p id="city-copy">These cities combine the highest illustrative market concentration with the fastest regional growth (9%). Keep Hamburg, Cologne and Frankfurt as the next expansion wave once channel economics hold.</p>
+        <div class="city-stats"><span><b id="city-share">33%</b> combined market share</span><span><b id="city-growth">9%</b> regional CAGR</span></div>
       </section>
 
       <section class="module-intro" aria-labelledby="modules-title">
