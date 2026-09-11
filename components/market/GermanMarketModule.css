@@ -1,0 +1,22 @@
+.german-market-module { color: #11221D; font-family: Manrope, system-ui, sans-serif; max-width: 1240px; margin: 0 auto; }
+.market-module-header, .market-method, .market-priority-card, .market-quality { background: #fff; border: 1px solid #DFE5DF; border-radius: 16px; padding: 24px; }
+.market-module-header, .market-method, .market-quality { margin-bottom: 16px; }
+.market-kicker { color: #64716C; font: 600 12px/1.2 "DM Mono", monospace; letter-spacing: .04em; margin: 0 0 8px; text-transform: uppercase; }
+.market-module-header h2, .market-priority-card h3 { font-family: "Playfair Display", Georgia, serif; margin: 0; }
+.market-module-header p:not(.market-kicker), .market-method p, .market-quality p { color: #274038; line-height: 1.5; }
+.market-method ul, .market-quality ul { line-height: 1.5; padding-left: 20px; }
+.market-priority-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.market-priority-card header { align-items: start; display: flex; justify-content: space-between; gap: 16px; }
+.market-score { background: #CDF45E; border-radius: 9px; font: 700 24px/1 "DM Mono", monospace; padding: 10px; white-space: nowrap; }
+.market-score small { font-size: 12px; }
+.market-drivers { color: #274038; line-height: 1.5; }
+.market-evidence { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
+.market-evidence div { border-top: 1px solid #DFE5DF; padding-top: 8px; }
+.market-evidence dt { color: #64716C; font-size: 12px; }
+.market-evidence dd { font-size: 18px; font-weight: 700; margin: 4px 0 0; }
+.market-priority-card details { margin-top: 16px; }
+.market-priority-card summary { cursor: pointer; font-weight: 700; }
+.market-component-list { list-style: none; padding: 0; }
+.market-component-list li { border-bottom: 1px solid #DFE5DF; display: grid; gap: 4px; grid-template-columns: 1fr auto; padding: 8px 0; }
+.market-component-list small { color: #64716C; grid-column: 1 / -1; }
+@media (max-width: 390px) { .market-module-header, .market-method, .market-priority-card, .market-quality { padding: 16px; } }
