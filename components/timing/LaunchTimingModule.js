@@ -1,0 +1,15 @@
+import { buildLaunchTimingOutput, TIMING_WEIGHTS } from '../../lib/timing/launchTiming.js';
+
+const componentLabel = (key) => key.replace(/([A-Z])/g, ' $1');
+
+export function renderLaunchTimingModule(container, data = buildLaunchTimingOutput()) {
+  const preferred = data.preferredLaunchPeriod; const alternative = data.alternativePeriod;
+  container.innerHTML = `<section class="timing-module" aria-labelledby="timing-title">
+    <header class="timing-hero"><div><p class="timing-kicker">Independent module / German market context</p><h2 id="timing-title">Launch in May.<br /><em>Learn before the peak.</em></h2></div><p>${preferred.rationale} This is a timing hypothesis, not a final executive recommendation.</p></header>
+    <section class="timing-cards"><article class="timing-primary"><p class="timing-kicker">Preferred window</p><h3>${preferred.period} <span>${preferred.score}/100</span></h3><p>${preferred.rationale}</p></article><article><p class="timing-kicker">Alternative window</p><h3>${alternative.period} <span>${alternative.score}/100</span></h3><p>${alternative.rationale}</p></article><article><p class="timing-kicker">Confidence</p><h3>${data.confidence.level}</h3><p>${data.confidence.reason}</p></article></section>
+    <section class="timing-panel"><p class="timing-kicker">Transparent monthly timing score</p><p class="timing-method">${Object.entries(TIMING_WEIGHTS).map(([key, value]) => `${componentLabel(key)} ${value}`).join(' · ')}. <strong>Observed evidence</strong>: seasonality, temperature and past promotions. <strong>Assumption</strong>: launch runway.</p><div class="timing-months">${data.monthlyScores.map((month) => `<article class="timing-month ${month.month === 5 ? 'is-preferred' : ''}"><header><h3>${month.name}</h3><b>${month.score}</b></header><p>Index ${month.seasonalityIndex} · ${month.temperatureC}°C · ${month.promoCount ? month.promoBrands.join(', ') : 'no observed promotion'}</p><ul>${Object.entries(month.scoreComponents).map(([key, value]) => `<li><span>${componentLabel(key)}</span><strong>${value}</strong></li>`).join('')}</ul></article>`).join('')}</div></section>
+    <section class="timing-grid"><article><p class="timing-kicker">Seasonality evidence</p><p>${data.seasonalityEvidence.observed}</p><p>${data.seasonalityEvidence.interpretation}</p></article><article><p class="timing-kicker">Competitor evidence</p><p>Observed window: ${data.competitorEvidence.historyWindow}. List-price ranges: ${data.competitorEvidence.stableListPriceRanges.join('; ')}.</p><ul>${data.competitorEvidence.observedPromotions.map((item) => `<li>${item}</li>`).join('')}</ul><p>${data.competitorEvidence.caveat}</p></article></section>
+    <section class="timing-risk"><p class="timing-kicker">Risks & data boundaries</p><ul>${data.risks.map((risk) => `<li>${risk}</li>`).join('')}</ul><p><strong>Observed German data:</strong> ${data.evidenceBoundaries.observedGermanData} <strong>Historical LUMEN evidence:</strong> ${data.evidenceBoundaries.historicalLumenEvidence}</p></section>
+  </section>`;
+  return data;
+}
