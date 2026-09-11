@@ -8,11 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="integration.css" />
   </head>
   <body>
     <main class="shell">
       <header class="topbar">
         <a class="brand" href="#top" aria-label="LUMEN launch cockpit home"><span class="brand-mark">L</span><span>LUMEN</span></a>
+        <nav class="cockpit-nav" aria-label="Cockpit modules"><a href="#pricing">Pricing</a><a href="#channels">Channels</a><a href="#positioning">Positioning</a><a href="#market">Cities</a><a href="#launch-timing">Timing</a></nav>
         <div class="topbar-meta"><span class="pulse"></span> Germany entry decision · 2026</div>
       </header>
 
@@ -23,7 +25,7 @@
         <div class="hero-tag"><span>Recommended starting point</span><strong>€2.19 · Gym &amp; Office + DTC · May</strong></div>
       </section>
 
-      <section class="decision-grid" aria-label="Launch decision model">
+      <section class="decision-grid" id="pricing" aria-label="Launch decision model">
         <aside class="controls card">
           <div class="section-label">01 / Your launch design</div>
           <h2>Choose the trade-off</h2>
@@ -88,6 +90,31 @@
         <div><div class="section-label">Phased entry</div><h2>Prove the playbook in Berlin + Munich.</h2></div>
         <p>These cities combine the highest illustrative market concentration with the fastest regional growth (9%). Keep Hamburg, Cologne and Frankfurt as the next expansion wave once channel economics hold.</p>
         <div class="city-stats"><span><b>33%</b> combined market share</span><span><b>9%</b> regional CAGR</span></div>
+      </section>
+
+      <section class="module-intro" aria-labelledby="modules-title">
+        <div><p class="eyebrow">Decision evidence</p><h2 id="modules-title">Explore every module<br /><em>behind the launch call.</em></h2></div>
+        <p>Pricing remains interactive above. The four linked modules below provide the evidence on channel economics, positioning, city priority and launch timing.</p>
+      </section>
+
+      <section class="embedded-module" id="channels" aria-labelledby="channels-title">
+        <header><div><p class="section-label">04 / Channel economics</p><h2 id="channels-title">Which route earns the right to scale?</h2></div><a href="components/channels/standalone.html" target="_blank" rel="noopener">Open module ↗</a></header>
+        <iframe title="LUMEN channel economics module" src="components/channels/standalone.html" loading="lazy"></iframe>
+      </section>
+
+      <section class="embedded-module" id="positioning" aria-labelledby="positioning-title">
+        <header><div><p class="section-label">05 / Positioning trade-off</p><h2 id="positioning-title">How should LUMEN earn its premium?</h2></div><a href="components/positioning/standalone.html" target="_blank" rel="noopener">Open module ↗</a></header>
+        <iframe title="LUMEN positioning module" src="components/positioning/standalone.html" loading="lazy"></iframe>
+      </section>
+
+      <section class="embedded-module" id="market" aria-labelledby="market-title">
+        <header><div><p class="section-label">06 / German market priority</p><h2 id="market-title">Where should the launch prove its playbook?</h2></div><a href="components/market/standalone.html" target="_blank" rel="noopener">Open module ↗</a></header>
+        <iframe title="LUMEN German market prioritisation module" src="components/market/standalone.html" loading="lazy"></iframe>
+      </section>
+
+      <section class="embedded-module" id="launch-timing" aria-labelledby="launch-timing-title">
+        <header><div><p class="section-label">07 / Launch timing</p><h2 id="launch-timing-title">When should LUMEN enter the market?</h2></div><a href="components/timing/standalone.html" target="_blank" rel="noopener">Open module ↗</a></header>
+        <iframe title="LUMEN launch timing module" src="components/timing/standalone.html" loading="lazy"></iframe>
       </section>
 
       <footer><span>LUMEN Germany Launch Cockpit</span><span>Built from Exhibits 1, 2, 9, 11 &amp; 12 · No respondent-level personal data is used.</span></footer>
