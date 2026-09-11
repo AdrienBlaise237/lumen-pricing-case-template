@@ -1,6 +1,12 @@
 const $ = (selector) => document.querySelector(selector);
 const euro = new Intl.NumberFormat('en-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 });
 const state = { price: 2.19, weights: { 'DTC Online': 35, 'Retail/Grocery': 25, 'Gym & Office': 40 }, tests: [], competitors: [] };
+state.scenario = 'balanced';
+const scenarios = {
+  conservative: { price: 1.79, weights: { 'DTC Online': 50, 'Retail/Grocery': 0, 'Gym & Office': 50 }, hero: '€1.79 · Gym & Office + DTC · May', name: 'Conservative scenario', headline: 'Maximise trial.<br />Protect the learning budget.', copy: 'Start in <strong>Gym & Office</strong> and <strong>DTC Online</strong> in Berlin. Keep retail out of phase one while LUMEN proves repeat purchase and acquisition efficiency.', tradeoff: '<strong>Deliberate trade-off:</strong> accept thinner contribution per can in exchange for the strongest tested acceptance and a smaller, more controlled launch footprint.', cityHeading: 'Prove the playbook in Berlin first.', cityCopy: 'Berlin has the largest illustrated city-market share and the highest concentration of priority segments. Add other cities only after the initial launch signals are validated.', cityShare: '18%', cityGrowth: '9%', timingHeading: 'Build in April.<br /><em>Launch in May.</em>', timingCopy: 'May begins above-baseline demand and allows a learning runway before the June–August peak.', timingLabel: 'May demand index', timingIndex: '118' },
+  balanced: { price: 2.19, weights: { 'DTC Online': 35, 'Retail/Grocery': 25, 'Gym & Office': 40 }, hero: '€2.19 · Gym & Office + DTC · May', name: 'Balanced scenario', headline: 'Premium enough to signal quality.<br />Accessible enough to earn trial.', copy: 'Start in <strong>Gym & Office</strong> and <strong>DTC Online</strong>, then use repeat and CAC evidence before expanding to grocery. Lead with clean energy for active urban routines—not a luxury adaptogen ritual.', tradeoff: '<strong>Deliberate trade-off:</strong> give up some early grocery scale and the €2.59 margin ceiling in exchange for stronger acceptance, faster learning, and credible premium positioning.', cityHeading: 'Prove the playbook in Berlin + Munich.', cityCopy: 'These cities combine the highest illustrative market concentration with the fastest regional growth (9%). Keep Hamburg, Cologne and Frankfurt as the next expansion wave once channel economics hold.', cityShare: '33%', cityGrowth: '9%', timingHeading: 'Build in April.<br /><em>Launch in May.</em>', timingCopy: 'Demand crosses above its annual baseline in May and climbs through July.', timingLabel: 'May demand index', timingIndex: '118' },
+  growth: { price: 2.59, weights: { 'DTC Online': 20, 'Retail/Grocery': 55, 'Gym & Office': 25 }, hero: '€2.59 · Retail-led mix · Berlin + Munich + Hamburg · August', name: 'Growth scenario', headline: 'Push premium signal.<br />Trade trial for broader reach.', copy: 'Use a <strong>retail-led mix</strong> with DTC and Gym & Office support across Berlin, Munich and Hamburg. This expands distribution faster but requires strong in-store execution.', tradeoff: '<strong>Deliberate trade-off:</strong> accept the lower tested willingness to try at €2.59 in exchange for a stronger premium signal, wider retail reach and a larger initial market footprint.', cityHeading: 'Scale across Berlin + Munich + Hamburg.', cityCopy: 'Together these cities represent 43% of the illustrated market-share proxy. Hamburg adds high purchase intent, while its growth input is lower than Berlin and Munich.', cityShare: '43%', cityGrowth: '7–9%', timingHeading: 'Launch in August.<br /><em>Capture late-season demand.</em>', timingCopy: 'August retains a high 128 demand index and had no observed competitor promotion, but offers less learning runway than May.', timingLabel: 'August demand index', timingIndex: '128' },
+};
 
 function parseCSV(text) {
   const rows = []; let row = [], value = '', quoted = false;
@@ -19,6 +25,35 @@ function parseCSV(text) {
 function normalisedWeights() {
   const total = Object.values(state.weights).reduce((a, b) => a + b, 0) || 1;
   return Object.fromEntries(Object.entries(state.weights).map(([k, v]) => [k, v / total]));
+}
+
+function renderScenarioSummary() {
+  const scenario = scenarios[state.scenario] || scenarios.balanced;
+  $('#hero-recommendation').textContent = scenario.hero;
+  $('#scenario-choice').textContent = scenario.name;
+  $('#scenario-price').textContent = `€${scenario.price.toFixed(2)}`;
+  $('#scenario-headline').innerHTML = scenario.headline;
+  $('#scenario-copy').innerHTML = scenario.copy;
+  $('#scenario-tradeoff').innerHTML = scenario.tradeoff;
+  $('#city-heading').textContent = scenario.cityHeading;
+  $('#city-copy').textContent = scenario.cityCopy;
+  $('#city-share').textContent = scenario.cityShare;
+  $('#city-growth').textContent = scenario.cityGrowth;
+  $('#timing-heading').innerHTML = scenario.timingHeading;
+  $('#timing-copy').textContent = scenario.timingCopy;
+  $('#timing-label').textContent = scenario.timingLabel;
+  $('#may-index').textContent = scenario.timingIndex;
+  document.querySelectorAll('[data-scenario]').forEach((button) => button.classList.toggle('active', button.dataset.scenario === state.scenario));
+}
+
+function applyScenario(name) {
+  const scenario = scenarios[name];
+  state.scenario = name;
+  state.price = scenario.price;
+  state.weights = { ...scenario.weights };
+  document.querySelector(`input[name="price"][value="${scenario.price}"]`).checked = true;
+  Object.entries({ dtc: 'DTC Online', retail: 'Retail/Grocery', gym: 'Gym & Office' }).forEach(([id, channel]) => { $(`#${id}`).value = scenario.weights[channel]; });
+  update();
 }
 
 function update() {
@@ -42,6 +77,7 @@ function update() {
   document.querySelectorAll('.price-options label').forEach(label => label.classList.toggle('selected', label.querySelector('input').checked));
   Object.entries({dtc:'DTC Online',retail:'Retail/Grocery',gym:'Gym & Office'}).forEach(([id, channel]) => $(`#${id}-out`).textContent = `${Math.round(weights[channel] * 100)}%`);
   $('#mix-total').textContent = `${Object.values(state.weights).reduce((a,b) => a+b,0)}%`;
+  renderScenarioSummary();
   if (state.competitors.length) renderCompetitors(state.competitors);
 }
 
@@ -65,6 +101,7 @@ async function init() {
     state.tests = parseCSV(tests); state.competitors = parseCSV(competitors); renderSeasonality(parseCSV(seasonality)); update();
   } catch (error) { console.error(error); $('#outcome-subtitle').textContent = 'Run this site through a local web server to load the model data.'; }
 }
-document.querySelectorAll('input[name="price"]').forEach(el => el.addEventListener('change', e => { state.price = Number(e.target.value); update(); }));
-[['dtc','DTC Online'],['retail','Retail/Grocery'],['gym','Gym & Office']].forEach(([id, channel]) => $(`#${id}`).addEventListener('input', e => { state.weights[channel] = Number(e.target.value); update(); }));
+document.querySelectorAll('input[name="price"]').forEach(el => el.addEventListener('change', e => { state.scenario = 'balanced'; state.price = Number(e.target.value); update(); }));
+[['dtc','DTC Online'],['retail','Retail/Grocery'],['gym','Gym & Office']].forEach(([id, channel]) => $(`#${id}`).addEventListener('input', e => { state.scenario = 'balanced'; state.weights[channel] = Number(e.target.value); update(); }));
+document.querySelectorAll('[data-scenario]').forEach((button) => button.addEventListener('click', () => applyScenario(button.dataset.scenario)));
 init();
